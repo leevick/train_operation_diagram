@@ -15,7 +15,11 @@ function data()
             params = {},
             url = "https://github.com/leevick/train_operation_diagram",
         },
-        -- runFn = function (settings, modParams) ...
-        -- postRunFn = function (settings, params) ...
+        runFn = function(settings, modParams)
+            print("Hello, world!")
+        end,
+        postRunFn = function(settings, params)
+            print("Goodbye, world!")
+        end
     }
 end
