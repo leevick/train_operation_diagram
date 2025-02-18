@@ -1,19 +1,28 @@
+local function log(message, ...)
+    local timestamp = os.date("%H:%M:%S.") .. string.format("%03d", math.floor((os.clock() % 1) * 1000))
+    local input = { ... }
+    print(string.format("[%s][TOD]" .. message, timestamp, input))
+end
+
+
 function data()
     return {
         save = function()
-            print("Saved the world!")
+            log("Saved the world!")
+            return nil
         end,
         load = function(loadedstate)
-            print("Loaded the world!")
+            log("Lua version: " .. _VERSION)
+            log("Loaded the world!")
         end,
         update = function()
-            print("Updated the world!")
+            log("Updated the world!")
         end,
         guiHandleEvent = function(id, name, param)
-            print("Handled an UI event!")
+            log("Handled an UI event!", id, name)
         end,
         handleEvent = function(src, id, name, param)
-            print("Handled an event!")
+            log("Handled an event!", id, name)
         end,
     }
 end
