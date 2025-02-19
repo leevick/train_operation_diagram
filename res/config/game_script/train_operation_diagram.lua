@@ -4,6 +4,7 @@ local function log(message, ...)
     print(string.format("[%s][TOD]" .. message, timestamp, input))
 end
 
+local initialized = false
 
 function data()
     return {
@@ -18,6 +19,22 @@ function data()
         update = function()
             log("Updated the world!")
         end,
+
+        guiUpdate = function()
+            if not initialized then
+                log("Initialized the UI!")
+                initialized = true
+
+                local buttonLabel = gui.textView_create("gameInfo.timetables.label", "Timetables")
+
+                local button = gui.button_create("gameInfo.timetables.button", buttonLabel)
+                button:onClick(function()
+                    log("Clicked the button!")
+                end)
+                game.gui.boxLayout_addItem("gameInfo.layout", button.id)
+            end
+        end,
+
         guiHandleEvent = function(id, name, param)
             log("Handled an UI event!", id, name)
         end,
